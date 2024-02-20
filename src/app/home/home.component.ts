@@ -17,6 +17,20 @@ export class HomeComponent {
     unit: "",
   }
 
+  items: { title: string; calcul: string; result: string; unit: string; }[] = [];
+
+
+  constructor() {
+    fromEvent(window, 'storage').subscribe(() => {
+      let storedItems = localStorage.getItem('items');
+
+      if (storedItems) {
+        let parsedItems = JSON.parse(storedItems);
+        this.items = parsedItems;
+      }
+    });
+  }
+
   calculate() {
     let result
     try {
@@ -39,5 +53,17 @@ export class HomeComponent {
 
   deleteLastEntry() {
     this.item.calcul = this.item.calcul.slice(0, -1);
+  }
+
+  registerItem() {
+    if (this.item.title) {
+      this.items.push({
+        title: this.item.title,
+        calcul: this.item.calcul,
+        result: this.item.result,
+        unit: this.item.unit
+      });
+      localStorage.setItem('items', JSON.stringify(this.items));
+    }
   }
 }
