@@ -1,0 +1,31 @@
+#calculator {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    border: 3px solid black;
+    padding: 10px;
+
+
+
+    .tabContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+#fields {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-top: 10px;
+    }
+}
+
+#calculatorButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}

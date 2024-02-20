@@ -1,0 +1,22 @@
+<section id="inventory">
+    <div class="tabs">
+        <button class="tablinks" onclick="openTab(event, 'Calcul')">Calcul</button>
+        <button class="tablinks" onclick="openTab(event, 'Resultats')">Résultats</button>
+    </div>
+
+        
+    <div id="results" class="tabcontent">
+        <div>
+            <p class="font-bold">{{ item.title }}</p>
+            <p class="font-bold">{{ item.calcul }}</p>
+            <p class="font-bold">{{ item.result }}</p>
+            <p class="font-bold">{{ item.unit }}</p>
+        </div>
+    </div>
+    
+    <div id="exports" class="tabcontent">
+        <button id="importCSV">Importer CSV</button>
+        <button id="print">Imprimer</button>
+        <button id="saveCSV">Enregistrer en CSV</button>
+    </div>
+</section>

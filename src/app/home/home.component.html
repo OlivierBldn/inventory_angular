@@ -1,0 +1,52 @@
+<section id="calculator">
+    <div class="tabs">
+        <button class="tablinks" onclick="openTab(event, 'Calcul')">Calcul</button>
+        <button class="tablinks" onclick="openTab(event, 'Resultats')">Résultats</button>
+    </div>
+    
+    <div class="tabcontent">
+
+        <div id="fields">
+            <label for="productTitle">Intitulé du produit:</label>
+            <input type="text" id="productTitle" name="productTitle">
+        
+            <label for="calcInput">Calcul:</label>
+            <input type="text" id="calcInput" name="calcInput" readonly>
+            
+            <label for="result">Résultat:</label>
+            <input type="text" id="result" name="result" readonly>
+            
+            <label for="unitType">Type d'unité:</label>
+            <select id="unitType" name="unitType">
+            <option value="m2">Mètre carré</option>
+            <option value="ml">Mètre linéaire</option>
+            <option value="m3">Mètre cube</option>
+            <option value="unit">Unité</option>
+            <option value="length">Longueur</option>
+            </select>
+        </div> 
+        
+        <div id="calculatorButtons">
+            <button value="(">(</button>
+            <button value=")">)</button>
+            <button value="AC">AC</button>
+            <button value="carre">&#xB2;</button>
+            <button value="7">7</button>
+            <button value="8">8</button>
+            <button value="9">9</button>
+            <button value="*">x</button>
+            <button value="4">4</button>
+            <button value="5">5</button>
+            <button value="6">6</button>
+            <button value="-">-</button>
+            <button value="1">1</button>
+            <button value="2">2</button>
+            <button value="3">3</button>
+            <button value="+">+</button>
+            <button value="0">0</button>
+            <button value=",">,</button>
+            <button value="/">/</button>
+            <button value="=">=</button>
+        </div>
+    </div>
+</section>
