@@ -105,21 +105,53 @@ export class HomeComponent {
     }
   }
 
-  exportAsCsv() {
-    let csvData = 'Title,Calculation,Result,Unit\n';
+  printData() {
+    let printContents = '<table><tr><th>Désignation</th><th>Quantité</th><th>Unité</th></tr>';
     this.items.forEach(item => {
-      csvData += `${item.title},${item.calculation},${item.result},${item.unit}\n`;
+      printContents += `<tr><td>${item.title}</td><td>${item.result}</td><td>${item.unit}</td></tr>`;
     });
+    printContents += '</table>';
   
-    let blob = new Blob([csvData], { type: 'text/csv' });
+    let originalContents = document.body.innerHTML;
+  
+    document.body.innerHTML = printContents;
+  
+    window.print();
+  
+    document.body.innerHTML = originalContents;
+  }
+
+  exportCsv() {
+    let data = JSON.parse(localStorage.getItem('items') || '[]');
+    
+    let csvData = this.convertToCSV(data);
+    
+    this.downloadFile(csvData, 'text/csv', 'data.csv');
+  }
+  
+  convertToCSV(objArray: string) {
+    const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    let str = `${Object.keys(array[0]).map(value => `"${value}"`).join(",")}` + '\r\n';
+  
+    for (let i = 0; i < array.length; i++) {
+      let line = '';
+      for (let index in array[i]) {
+        if (line != '') line += ','
+        line += `"${array[i][index]}"`;
+      }
+      str += line + '\r\n';
+    }
+    return str;
+  }
+  
+  downloadFile(data: any, type: string, filename: string) {
+    let blob = new Blob([data], { type: type });
     let url = window.URL.createObjectURL(blob);
-  
-    let link = document.createElement('a');
-    link.setAttribute('hidden', '');
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'export.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    let a = window.document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 }
