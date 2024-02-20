@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http'; 
-import { fromEvent } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -24,6 +24,7 @@ export class HomeComponent {
 
   selectedFile: File | null = null;
 
+  currentView: string = 'calculator';
 
   constructor(private http: HttpClient) {
     let storedItems = localStorage.getItem('items');
@@ -155,5 +156,9 @@ export class HomeComponent {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+  }
+
+    isActive(view: string): boolean {
+      return this.currentView === view;
   }
 }

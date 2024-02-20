@@ -1,12 +1,18 @@
 <section id="page">
-    <section id="calculator">
+
+    <div class="view-switch">
+        <button [class.active]="isActive('calculator')" (click)="currentView = 'calculator'">Saisie</button>
+        <button [class.active]="isActive('results')" (click)="currentView = 'results'">Produits</button>
+    </div>
+
+    <section id="calculator" *ngIf="currentView === 'calculator'">
         
         <div class="tabcontent">
             <div id="fields">
-                <label for="productTitle">Intitulé du produit:</label>
+                <label for="productTitle">Intitulé du produit :</label>
                 <input type="text" id="productTitle" name="productTitle" [(ngModel)]="item.title" required>
 
-                <label for="unitType">Type d'unité:</label>
+                <label for="unitType">Type d'unité :</label>
                 <select id="unitType" name="unitType" [(ngModel)]="item.unit" required>
                     <option value="m2">Mètre carré</option>
                     <option value="ml">Mètre linéaire</option>
@@ -15,10 +21,10 @@
                     <option value="length">Longueur</option>
                 </select>
             
-                <label for="calcInput">Calcul:</label>
+                <label for="calcInput">Calcul :</label>
                 <input type="text" id="calcInput" name="calcInput" required readonly [(ngModel)]="item.calculation" inputmode="">
                 
-                <label for="result">Résultat:</label>
+                <label for="result">Résultat :</label>
                 <input type="text" id="result" name="result" required readonly [(ngModel)]="item.result" inputmode="none">
             </div> 
             
@@ -30,28 +36,27 @@
                 <button (click)="addToCalcul('7')" class="calculatorButton">7</button>
                 <button (click)="addToCalcul('8')" class="calculatorButton">8</button>
                 <button (click)="addToCalcul('9')" class="calculatorButton">9</button>
-                <button (click)="addToCalcul('*')" class="calculatorButton operator">&times;</button>
                 <button (click)="addToCalcul('4')" class="calculatorButton">4</button>
                 <button (click)="addToCalcul('5')" class="calculatorButton">5</button>
                 <button (click)="addToCalcul('6')" class="calculatorButton">6</button>
-                <button (click)="addToCalcul('-')" class="calculatorButton operator">-</button>
                 <button (click)="addToCalcul('1')" class="calculatorButton">1</button>
                 <button (click)="addToCalcul('2')" class="calculatorButton">2</button>
                 <button (click)="addToCalcul('3')" class="calculatorButton">3</button>
-                <button (click)="addToCalcul('+')" class="calculatorButton operator">+</button>
                 <button (click)="addToCalcul('0')" class="calculatorButton">0</button>
+                <button (click)="addToCalcul('-')" class="calculatorButton operator">-</button>
+                <button (click)="addToCalcul('+')" class="calculatorButton operator">+</button>
                 <button (click)="addToCalcul('.')" class="calculatorButton operator">,</button>
                 <button (click)="addToCalcul('/')" class="calculatorButton operator">/</button>
+                <button (click)="addToCalcul('*')" class="calculatorButton operator">&times;</button>
                 <button (click)="calculate()" class="calculatorButton calculate">=</button>
-            </div>
-
-            <div id="itemStorage">
-                <button id="registerItem" (click)="registerItem()">Enregistrer le produit</button>
+                <button id="registerItem" (click)="registerItem()" class="calculatorButton">
+                    <img src="../../assets/enter-svg.svg" alt="Enregistrer le produit">
+                </button>
             </div>
         </div>
     </section>
 
-    <section id="results">
+    <section id="results" *ngIf="currentView === 'results'">
         <table>
             <thead>
                 <tr>
@@ -74,10 +79,13 @@
         </table>
 
         <div id="exports" class="tabcontent">
-            <input type="file" (change)="onFileSelected($event)" accept=".csv">
-            <button (click)="importCsv()">Import CSV</button>
-            <button id="print" (click)="printData()">Imprimer</button>
-            <button (click)="exportCsv()">Exporter en CSV</button>
+            <span>
+                <label for="file">Sélectionner un fichier CSV</label>
+                <input type="file" name="file" (change)="onFileSelected($event)" accept=".csv">
+            </span>
+            <button (click)="importCsv()">Importer CSV</button>
+            <button id="print" (click)="printData()">Imprimer la liste</button>
+            <button (click)="exportCsv()">Exporter CSV</button>
         </div>
     </section>
 </section>
