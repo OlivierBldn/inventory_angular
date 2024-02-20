@@ -63,7 +63,7 @@ export class HomeComponent {
   }
 
   registerItem() {
-    if (this.item.title) {
+    if (this.item.title && this.item.calculation && this.item.result && this.item.unit) {
       this.items.push({
         title: this.item.title,
         calculation: this.item.calculation,
@@ -71,6 +71,8 @@ export class HomeComponent {
         unit: this.item.unit
       });
       localStorage.setItem('items', JSON.stringify(this.items));
+    } else {
+      alert('Complétez tous les champs');
     }
   }
 
