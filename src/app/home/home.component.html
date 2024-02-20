@@ -64,6 +64,7 @@
                     <th>Calcul</th>
                     <th>Résultat</th>
                     <th>Type d'unité</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,7 +75,7 @@
                     <td>{{ item.result }}</td>
                     <td>{{ item.unit }}</td>
                     <td>
-                        <button (click)="deleteItem($index)">Supprimer</button>
+                        <button (click)="deleteItem($index)" id="deletion">Supprimer</button>
                     </td>
                 </tr>
                 }
