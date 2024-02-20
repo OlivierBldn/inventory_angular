@@ -73,6 +73,9 @@
                     <td>{{ item.calculation }}</td>
                     <td>{{ item.result }}</td>
                     <td>{{ item.unit }}</td>
+                    <td>
+                        <button (click)="deleteItem($index)">Supprimer</button>
+                    </td>
                 </tr>
                 }
             </tbody>
