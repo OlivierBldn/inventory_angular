@@ -8,45 +8,57 @@
 
         <div id="fields">
             <label for="productTitle">Intitulé du produit:</label>
-            <input type="text" id="productTitle" name="productTitle">
+            <input type="text" id="productTitle" name="productTitle" [(ngModel)]="item.title">
         
             <label for="calcInput">Calcul:</label>
-            <input type="text" id="calcInput" name="calcInput" readonly>
+            <input type="text" id="calcInput" name="calcInput" readonly [(ngModel)]="item.calcul"  inputmode="">
             
             <label for="result">Résultat:</label>
-            <input type="text" id="result" name="result" readonly>
+            <input type="text" id="result" name="result" readonly [(ngModel)]="item.result"  inputmode="none">
             
             <label for="unitType">Type d'unité:</label>
-            <select id="unitType" name="unitType">
-            <option value="m2">Mètre carré</option>
-            <option value="ml">Mètre linéaire</option>
-            <option value="m3">Mètre cube</option>
-            <option value="unit">Unité</option>
-            <option value="length">Longueur</option>
+            <select id="unitType" name="unitType" [(ngModel)]="item.unit">
+                <option value="m2">Mètre carré</option>
+                <option value="ml">Mètre linéaire</option>
+                <option value="m3">Mètre cube</option>
+                <option value="unit">Unité</option>
+                <option value="length">Longueur</option>
             </select>
+
         </div> 
         
         <div id="calculatorButtons">
-            <button value="(">(</button>
-            <button value=")">)</button>
-            <button value="AC">AC</button>
-            <button value="carre">&#xB2;</button>
-            <button value="7">7</button>
-            <button value="8">8</button>
-            <button value="9">9</button>
-            <button value="*">x</button>
-            <button value="4">4</button>
-            <button value="5">5</button>
-            <button value="6">6</button>
-            <button value="-">-</button>
-            <button value="1">1</button>
-            <button value="2">2</button>
-            <button value="3">3</button>
-            <button value="+">+</button>
-            <button value="0">0</button>
-            <button value=",">,</button>
-            <button value="/">/</button>
-            <button value="=">=</button>
+            <button (click)="addToCalcul('(')">(</button>
+            <button (click)="addToCalcul(')')">)</button>
+            <button (click)="clearCalcul()">AC</button>
+            <button (click)="deleteLastEntry()">DEL</button>
+            <button (click)="addToCalcul('7')">7</button>
+            <button (click)="addToCalcul('8')">8</button>
+            <button (click)="addToCalcul('9')">9</button>
+            <button (click)="addToCalcul('*')">x</button>
+            <button (click)="addToCalcul('4')">4</button>
+            <button (click)="addToCalcul('5')">5</button>
+            <button (click)="addToCalcul('6')">6</button>
+            <button (click)="addToCalcul('-')">-</button>
+            <button (click)="addToCalcul('1')">1</button>
+            <button (click)="addToCalcul('2')">2</button>
+            <button (click)="addToCalcul('3')">3</button>
+            <button (click)="addToCalcul('+')">+</button>
+            <button (click)="addToCalcul('0')">0</button>
+            <button (click)="addToCalcul(',')">,</button>
+            <button (click)="addToCalcul('/')">/</button>
+            <button (click)="calculate()">=</button>
         </div>
     </div>
 </section>
+
+
+
+<div id="results" class="tabcontent">
+        <div>
+            <p class="font-bold">{{ item.title }}</p>
+            <p class="font-bold">{{ item.calcul }}</p>
+            <p class="font-bold">{{ item.result }}</p>
+            <p class="font-bold">{{ item.unit }}</p>
+        </div>
+</div>
