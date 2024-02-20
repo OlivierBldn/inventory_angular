@@ -1,68 +1,88 @@
-<section id="calculator">
+<section id="page">
+
     <div class="tabs">
         <button class="tablinks" onclick="openTab(event, 'Calcul')">Calcul</button>
         <button class="tablinks" onclick="openTab(event, 'Resultats')">Résultats</button>
     </div>
+
+<section id="calculator">
     
     <div class="tabcontent">
-
         <div id="fields">
             <label for="productTitle">Intitulé du produit:</label>
-            <input type="text" id="productTitle" name="productTitle" [(ngModel)]="item.title">
-        
-            <label for="calcInput">Calcul:</label>
-            <input type="text" id="calcInput" name="calcInput" readonly [(ngModel)]="item.calcul"  inputmode="">
-            
-            <label for="result">Résultat:</label>
-            <input type="text" id="result" name="result" readonly [(ngModel)]="item.result"  inputmode="none">
-            
+            <input type="text" id="productTitle" name="productTitle" [(ngModel)]="item.title" required>
+
             <label for="unitType">Type d'unité:</label>
-            <select id="unitType" name="unitType" [(ngModel)]="item.unit">
+            <select id="unitType" name="unitType" [(ngModel)]="item.unit" required>
                 <option value="m2">Mètre carré</option>
                 <option value="ml">Mètre linéaire</option>
                 <option value="m3">Mètre cube</option>
                 <option value="unit">Unité</option>
                 <option value="length">Longueur</option>
             </select>
-
+        
+            <label for="calcInput">Calcul:</label>
+            <input type="text" id="calcInput" name="calcInput" required readonly [(ngModel)]="item.calculation" inputmode="">
+            
+            <label for="result">Résultat:</label>
+            <input type="text" id="result" name="result" required readonly [(ngModel)]="item.result" inputmode="none">
         </div> 
         
         <div id="calculatorButtons">
-            <button (click)="addToCalcul('(')">(</button>
-            <button (click)="addToCalcul(')')">)</button>
-            <button (click)="clearCalcul()">AC</button>
-            <button (click)="deleteLastEntry()">DEL</button>
-            <button (click)="addToCalcul('7')">7</button>
-            <button (click)="addToCalcul('8')">8</button>
-            <button (click)="addToCalcul('9')">9</button>
-            <button (click)="addToCalcul('*')">x</button>
-            <button (click)="addToCalcul('4')">4</button>
-            <button (click)="addToCalcul('5')">5</button>
-            <button (click)="addToCalcul('6')">6</button>
-            <button (click)="addToCalcul('-')">-</button>
-            <button (click)="addToCalcul('1')">1</button>
-            <button (click)="addToCalcul('2')">2</button>
-            <button (click)="addToCalcul('3')">3</button>
-            <button (click)="addToCalcul('+')">+</button>
-            <button (click)="addToCalcul('0')">0</button>
-            <button (click)="addToCalcul(',')">,</button>
-            <button (click)="addToCalcul('/')">/</button>
-            <button (click)="calculate()">=</button>
+            <button (click)="addToCalcul('(')" class="calculatorButton operator">(</button>
+            <button (click)="addToCalcul(')')" class="calculatorButton operator">)</button>
+            <button (click)="clearCalcul()" class="calculatorButton operator">AC</button>
+            <button (click)="deleteLastEntry()" class="calculatorButton operator">DEL</button>
+            <button (click)="addToCalcul('7')" class="calculatorButton">7</button>
+            <button (click)="addToCalcul('8')" class="calculatorButton">8</button>
+            <button (click)="addToCalcul('9')" class="calculatorButton">9</button>
+            <button (click)="addToCalcul('*')" class="calculatorButton operator">&times;</button>
+            <button (click)="addToCalcul('4')" class="calculatorButton">4</button>
+            <button (click)="addToCalcul('5')" class="calculatorButton">5</button>
+            <button (click)="addToCalcul('6')" class="calculatorButton">6</button>
+            <button (click)="addToCalcul('-')" class="calculatorButton operator">-</button>
+            <button (click)="addToCalcul('1')" class="calculatorButton">1</button>
+            <button (click)="addToCalcul('2')" class="calculatorButton">2</button>
+            <button (click)="addToCalcul('3')" class="calculatorButton">3</button>
+            <button (click)="addToCalcul('+')" class="calculatorButton operator">+</button>
+            <button (click)="addToCalcul('0')" class="calculatorButton">0</button>
+            <button (click)="addToCalcul('.')" class="calculatorButton operator">,</button>
+            <button (click)="addToCalcul('/')" class="calculatorButton operator">/</button>
+            <button (click)="calculate()" class="calculatorButton calculate">=</button>
         </div>
 
-        <div id="submit">
+        <div id="itemStorage">
             <button id="registerItem" (click)="registerItem()">Enregistrer le produit</button>
         </div>
     </div>
 </section>
 
+<section id="results">
+    <table>
+        <thead>
+            <tr>
+                <th>Intitulé du produit</th>
+                <th>Calcul</th>
+                <th>Résultat</th>
+                <th>Type d'unité</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of items; track $index) {
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.calculation }}</td>
+                <td>{{ item.result }}</td>
+                <td>{{ item.unit }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
 
+    <div>
+        <input type="file" (change)="onFileSelected($event)" accept=".csv">
+        <button (click)="importCsv()">Importer CSV</button>
+    </div>
+</section>
 
-<div id="results" class="tabcontent">
-        <div>
-            <p class="font-bold">{{ item.title }}</p>
-            <p class="font-bold">{{ item.calcul }}</p>
-            <p class="font-bold">{{ item.result }}</p>
-            <p class="font-bold">{{ item.unit }}</p>
-        </div>
-</div>
+</section>

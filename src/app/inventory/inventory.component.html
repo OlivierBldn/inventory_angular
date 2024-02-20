@@ -15,7 +15,8 @@
     </div>
     
     <div id="exports" class="tabcontent">
-        <button id="importCSV">Importer CSV</button>
+        <input type="file" (change)="onFileSelected($event)" accept=".csv">
+        <button (click)="importCsv()">Import CSV</button>
         <button id="print">Imprimer</button>
         <button id="saveCSV">Enregistrer en CSV</button>
     </div>
